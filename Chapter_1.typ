@@ -1,6 +1,18 @@
 #import "@preview/physica:0.9.3": *
-= Field Theory
+#set heading(numbering: "1.1.1")
 
+// reset counter at each chapter
+#show heading.where(level:1): it => {
+  counter(math.equation).update(0)
+  it
+}
+
+#set math.equation(numbering: n => {
+  let h1 = counter(heading).get().first()
+  numbering("(1.1)", h1, n)
+})
+
+= Field Theory
 == Definition
 First,let us define scalar field $phi$ as $phi = phi(bold(r),t)=phi(x,y,z,t)$ and vector field $bold(a)$ as $bold(a) = bold(a)(bold(r),t) = bold(a)(x,y,z,t)$.
 
