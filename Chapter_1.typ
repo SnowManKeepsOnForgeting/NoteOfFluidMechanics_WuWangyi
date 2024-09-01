@@ -1,16 +1,9 @@
 #import "@preview/physica:0.9.3": *
-#set heading(numbering: "1.1.1")
+#import "@preview/i-figured:0.2.4"
+#set heading(numbering: "1.1")
 
-// reset counter at each chapter
-#show heading.where(level:1): it => {
-  counter(math.equation).update(0)
-  it
-}
+#show math.equation: i-figured.show-equation
 
-#set math.equation(numbering: n => {
-  let h1 = counter(heading).get().first()
-  numbering("(1.1)", h1, n)
-})
 
 = Field Theory
 == Definition
@@ -47,4 +40,76 @@ op("rot") bold(a) = mat(delim: "|",
 $
 
 == Basic formula
+#counter(math.equation).update(0)
 Let us deduce basic formula!
+#block(
+  fill: luma(230),
+  inset: 8pt, 
+  radius: 4pt
+)[
+$
+"grad"(phi + psi) = "grad"phi + "grad"psi
+$
+*Proof*:It is as same as derivation.
+]
+
+#block(
+  fill: luma(230),
+  inset: 8pt, 
+  radius: 4pt
+)[
+$
+"grad"(phi psi) = psi"grad"phi + phi"grad"psi
+$
+*Proof*:It is as same as derivation.
+]
+
+#block(
+  fill: luma(230),
+  inset: 8pt, 
+  radius: 4pt
+)[
+$
+"grad"F(phi) = F'(phi)"grad"phi
+$
+*Proof*:It is as same as derivation.
+]
+
+#block(
+  fill: luma(230),
+  inset: 8pt, 
+  radius: 4pt
+)[
+$
+"div"bold((a+b)) = "div"bold(a) + "div"bold(b)
+$
+*Proof*:It is as same as derivation.
+]
+
+#block(
+  fill: luma(230),
+  inset: 8pt,
+  radius: 4pt,
+)[
+$
+"div"(phi bold(a)) = phi"div"bold(a) + bold(a)dot"grad"phi
+$
+*Proof*:
+$
+"div"(phi bold(a)) = pdv(phi a_x,x) + pdv(phi a_y,y) + pdv(phi a_y,y) = phi"div"bold(a) + bold(a)dot "grad"phi
+$<->
+]
+
+
+
+
+#block(
+  fill: luma(230),
+  inset: 8pt, 
+  radius: 4pt
+)[
+$
+"div"(bold(a) times bold(b)) = bold(b)dot "rot"bold(a) - bold(a)dot "rot"bold(b)
+$
+*Proof*:
+]
