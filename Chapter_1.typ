@@ -21,7 +21,7 @@ $
 
 By Остроградский-Gauss formula,We can deduce:
 $
-op("div") bold(a) = pdv(bold(a),x) + pdv(bold(a),y) + pdv(bold(a),z)
+op("div") bold(a) = pdv(a_x,x) + pdv(a_y,y) + pdv(a_z,z)
 $
 
 We define projection along a direction $bold(n)$ of curl of the vector field as:
