@@ -2,8 +2,8 @@
 #import "@preview/i-figured:0.2.4"
 #set heading(numbering: "1.1")
 
-#show math.equation: i-figured.show-equation
-
+#show math.equation: i-figured.show-equation.with(level: 2)
+#show heading: i-figured.reset-counters.with(level: 2)
 
 = Field Theory
 == Definition
@@ -51,7 +51,6 @@ laplace = pdv(,x,2) + pdv(,y,2) + pdv(,z,2)
 $
 
 == Basic formula
-#counter(math.equation).update(0)
 Let us deduce basic formula!
 
 (1) Derivation formula
@@ -165,13 +164,11 @@ $<->
   $
   "rot"(bold(a) times bold(b)) = (bold(b) dot nabla)bold(a) -(bold(a) dot nabla)bold(b) + bold(a)"div"bold(b) - bold(b)"div"bold(a)
   $
-  *Proof*:
+  *Proof*:We refer $bold(a)_c,phi_c$ as a constant vector and a constant value which means we dont derivate it.
   $
-  "rot"(bold(a) times bold(b)) = mat(delim: "|", 
-  bold(i),bold(j),bold(k);
-  pdv(,x),pdv(,y),pdv(,z);
-  a_y b_z - b_y a_z,a_z b_x - a_x b_z,b_y a_x - a_y b_x
-  )
+  "Then" "rot"(bold(a) times bold(b)) &= nabla times (bold(a) times bold(b)) = nabla times (bold(a)_c times bold(b)) + nabla times (bold(a) times bold(b)_c)\
+  &= bold(a)_c (nabla dot bold(b)) - (bold(a)_c dot nabla)bold(b) + (bold(b)_c dot nabla)bold(a) - bold(b)_c (nabla dot bold(a))\
+  &=(bold(b) dot nabla)bold(a) - (bold(a)dot nabla)bold(b) + bold(a)"div"bold(b) - bold(b)"div"bold(a)
   $<->
 ]
 
@@ -182,8 +179,13 @@ $<->
 )[
   $
   "grad"(bold(a) dot bold(b)) = (bold(b)dot nabla)bold(a) + (bold(a) dot nabla)bold(b) + bold(b)times "rot"bold(a) + bold(a) times "rot"bold(b)
+  $<eq18>
+  *Proof*:
   $
-  *Proof*:I have not prove yet.
+  "grad"(bold(a) dot bold(b)) &= nabla(bold(a) dot bold(b)) = nabla (bold(a)_c dot bold(b)) + nabla (bold(a) dot bold(b)_c) \
+  &= bold(a)_c times (nabla times bold(b)) + (bold(a)_c dot nabla)bold(b) + bold(b)_c times (nabla times bold(a)) + (bold(b)_c dot nabla)bold(a)\
+  &= (bold(b)dot nabla)bold(a) + (bold(a) dot nabla)bold(b) + bold(b)times "rot"bold(a) + bold(a) times "rot"bold(b)
+  $<->
 ]
 
 #block(
@@ -194,7 +196,7 @@ $<->
   $
   "grad"((a^2)/2) = (bold(a) dot nabla)bold(a) + bold(a) times "rot"bold(a)
   $
-  *Proof*:I have not prove yet.
+  *Proof*:Substitute $bold(a)$ for $bold(b)$ in @eqt:eq18
 ]
 
 #block(
@@ -205,7 +207,10 @@ $<->
   $
   "div" "grad"phi = laplace phi
   $
-  *Proof*:I have not prove yet.
+  *Proof*:
+  $
+  "div" "grad"phi = nabla dot nabla phi = nabla^2 phi = laplace phi
+  $<->
 ]
 
 #block(
@@ -216,7 +221,10 @@ $<->
   $
   "div" "rot"bold(a) = 0
   $
-  *Proof*:I have not prove yet.
+  *Proof*:
+  $
+  "div" "rot"bold(a) = nabla dot (nabla times bold(a)) = (nabla times nabla)dot bold(a) = 0
+  $<->
 ]
 
 #block(
@@ -227,7 +235,10 @@ $<->
   $
   "rot" "grad"phi = 0
   $
-  *Proof*:I have not prove yet.
+  *Proof*:
+  $
+  "rot" "grad"phi = nabla times nabla phi = 0
+  $<->
 ]
 
 #block(
@@ -238,7 +249,10 @@ $<->
   $
   "rot" "rot"bold(a) = "grad" "div"bold(a) - laplace bold(a)
   $
-  *Proof*:I have not prove yet.
+  *Proof*:
+  $
+  "rot" "rot"bold(a) = nabla times (nabla times bold(a)) = nabla(nabla dot bold(a)) - (nabla dot nabla) bold(a) = "grad" "div"bold(a) - laplace bold(a)
+  $<->
 ]
 
 #block(
@@ -249,7 +263,10 @@ $<->
   $
   "div"(phi "grad"psi) = phi laplace psi + "grad"phi dot "grad"psi
   $
-  *Proof*:I have not prove yet.
+  *Proof*:
+  $
+  "div"(phi "grad"psi) = nabla dot (phi nabla psi) = nabla dot (phi_c nabla psi) + nabla dot (phi nabla psi_c) = phi laplace psi + "grad"phi "grad"psi
+  $<->
 ]
 
 #block(
@@ -260,7 +277,10 @@ $<->
   $
   laplace(phi psi) = psi laplace phi + phi laplace psi + 2"grad"phi dot "grad"psi
   $
-  *Proof*:I have not prove yet.
+  *Proof*:
+  $
+  laplace(phi psi) = nabla dot nabla(phi psi) = nabla dot (phi nabla psi + psi nabla phi) = psi laplace phi + phi laplace psi + 2"grad"phi dot "grad"psi
+  $<->
 ]
 
 (2) Integral formula
